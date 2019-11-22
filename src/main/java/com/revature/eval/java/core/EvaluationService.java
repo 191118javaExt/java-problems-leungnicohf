@@ -14,8 +14,12 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
-		
-		return "";
+		String result = "";
+		char[] c = string.toCharArray();
+		for (int i = c.length-1; i >= 0; i--) {
+			result += c[i];
+		}
+		return result;
 	}
 
 	/**
@@ -28,7 +32,12 @@ public class EvaluationService {
 	 */
 	public String acronym(String phrase) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		String[] word = phrase.split("[- ,]+");
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < word.length; i++) {
+			sb.append(word[i].charAt(0));
+		}
+		return sb.toString().toUpperCase();
 	}
 
 	/**
@@ -82,17 +91,29 @@ public class EvaluationService {
 
 		public boolean isEquilateral() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo && sideTwo == sideThree) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		public boolean isIsosceles() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne == sideTwo || sideOne == sideThree|| sideTwo == sideThree) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 		public boolean isScalene() {
 			// TODO Write an implementation for this method declaration
-			return false;
+			if (sideOne != sideTwo && sideOne != sideThree ||sideTwo != sideThree) {
+				return true;
+			} else {
+				return false;
+			}
 		}
 
 	}
@@ -106,15 +127,32 @@ public class EvaluationService {
 	 * 
 	 * 3 points for C, 1 point for A, twice 3 points for B, twice 2 points for G, 1
 	 * point for E And to total:
-	 * 
 	 * 3 + 2*1 + 2*3 + 2 + 1 = 3 + 2 + 6 + 3 = 5 + 9 = 14
-	 * 
 	 * @param string
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
 		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		for (char c : string.toCharArray()) {
+			c = c.toLowerCase();
+			if (c == 'a'|| c=='e'||c=='i'||c=='o'||c=='u'||c=='l'||c=='n'||c=='r'||c=='s'||c=='t') {
+				score++;
+			} else if (c=='d'||c=='g') {
+				score += 2;
+			} else if (c=='b'||c=='c'||c=='m'||c=='p') {
+				score += 3;
+			} else if (c=='f'||c=='h'||c=='v'||c=='w'||c=='y') {
+				score += 4;
+			} else if (c=='k') {
+				score += 5;
+			} else if (c=='j'||c=='x') {
+				score += 8;
+			} else if (c=='q'||c=='z') {
+				score +=10;
+			}
+		}
+		return score;
 	}
 
 	/**
@@ -150,7 +188,7 @@ public class EvaluationService {
 	 */
 	public String cleanPhoneNumber(String string) {
 		// TODO Write an implementation for this method declaration
-		return null;
+		return string.replace("+", "").replace("(", "").replace(")","").replace("+1","").replace(" ","").replace(".", "").replace("-","");
 	}
 
 	/**
